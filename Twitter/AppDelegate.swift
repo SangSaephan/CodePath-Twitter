@@ -43,44 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        let requestToken = BDBOAuth1Credential(queryString: url.query!)
-        
-        let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "YVxVpaBramhlqH85hMNyOS0sS", consumerSecret: "FqDnzSA9gD7AGK11ScgmJt8ukB3hj9dxoTgvwOiP8b6yEPRP2j")
-        
-        twitterClient?.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) in
-            
-            twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-                
-                let userDictionary = response as! NSDictionary
-                
-                let user = User(dictionary: userDictionary)
-                print(user.name!)
-                
-            }, failure: { (task: URLSessionDataTask?, error: Error) in
-                
-                print(error.localizedDescription)
-                
-            })
-            
-            twitterClient?.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-                
-                let tweetDictionary = response as! [NSDictionary]
-                let tweets = Tweet.tweetsWithArray(dictionaries: tweetDictionary)
-                
-                for tweet in tweets {
-                    print(tweet.text!)
-                }
-                
-            }, failure: { (task: URLSessionDataTask?, error: Error) in
-                
-                print(error.localizedDescription)
-                
-            })
-            
-        }, failure: { (error: Error?) in
-            print(error!.localizedDescription)
-        })
-        
+        TwitterClient.sharedInstance?.handleOpenUrl(url: url)
         return true
     }
 
