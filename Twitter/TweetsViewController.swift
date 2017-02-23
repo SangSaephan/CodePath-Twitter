@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -39,6 +40,9 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         cell.tweetLabel.text = tweets[indexPath.row].text!
+        cell.nameLabel.text = tweets[indexPath.row].name!
+        cell.screenNameLabel.text = "@\(tweets[indexPath.row].screenName!)"
+        cell.profileImageView.setImageWith(tweets[indexPath.row].profileImageUrl!)
         
         return cell
     }
