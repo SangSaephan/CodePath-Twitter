@@ -149,7 +149,14 @@
                             <constraint firstAttribute="trailing" secondItem="Cd4-iz-VNc" secondAttribute="trailing" id="dNp-pz-CJZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Twitter" id="swA-Y6-s9N"/>
+                    <navigationItem key="navigationItem" title="Twitter" id="swA-Y6-s9N">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="UoL-kA-zcP">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="onLogoutButton:" destination="wcs-D6-IMt" id="qu3-0h-dzB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Cd4-iz-VNc" id="7hx-ZJ-b39"/>
                     </connections>
@@ -161,12 +168,15 @@
         <!--Navigation Controller-->
         <scene sceneID="rOD-53-vQr">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="enA-0x-J82" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="enA-0x-J82" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="M4y-c5-7as">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="M4y-c5-7as">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.2279745638" green="0.63336116080000004" blue="0.95047610999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

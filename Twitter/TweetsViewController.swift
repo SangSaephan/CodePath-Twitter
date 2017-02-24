@@ -30,7 +30,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print(error.localizedDescription)
         })
         
-        TwitterClient.sharedInstance?.currentAccount()
+        //TwitterClient.sharedInstance?.currentAccount()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,5 +43,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return cell
     }
+    
+    @IBAction func onLogoutButton(_ sender: Any) {
+        TwitterClient.sharedInstance?.logout()
+    }
+    
 
 }
