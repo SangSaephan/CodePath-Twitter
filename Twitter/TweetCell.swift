@@ -14,7 +14,15 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var timeStampLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var retweetButtonOutlet: UIButton!
+    @IBOutlet weak var favoriteButtonOutlet: UIButton!
+    
+    var retweeted = false
+    var favorited = false
+    var tweetID: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,11 +36,15 @@ class TweetCell: UITableViewCell {
     }
     
     func configureCell(tweet: Tweet) {
+        tweetID = tweet.id!
+        
         tweetLabel.text = tweet.text!
         nameLabel.text = tweet.name!
         screenNameLabel.text = "@\(tweet.screenName!)"
         profileImageView.setImageWith(tweet.profileImageUrl!)
         timeStampLabel.text = calculateTimeStamp(timeTweetPostedAgo: (tweet.timestamp?.timeIntervalSinceNow)!)
+        retweetCountLabel.text = "\(tweet.retweetCount)"
+        favoriteCountLabel.text = "\(tweet.favoritesCount)"
     }
     
     // All credit for this method goes to David Wayman, slack @dwayman
@@ -64,5 +76,30 @@ class TweetCell: UITableViewCell {
         
         return "\(timeAgo)\(timeChar)"
     }
-
+    
+    @IBAction func retweetButton(_ sender: Any) {
+        
+        if retweeted == false {
+            retweetButtonOutlet.setImage(UIImage(named: "retweet-icon-green"), for: UIControlState.normal)
+            retweetCountLabel.text = "\(Int(retweetCountLabel.text!)! + 1)"
+            retweeted = true
+        } else {
+            retweetButtonOutlet.setImage(UIImage(named: "retweet-icon"), for: UIControlState.normal)
+            retweetCountLabel.text = "\(Int(retweetCountLabel.text!)! - 1)"
+            retweeted = false
+        }
+    }
+    
+    @IBAction func favoriteButton(_ sender: Any) {
+        
+        if favorited == false {
+            favoriteButtonOutlet.setImage(UIImage(named: "favor-icon-red"), for: UIControlState.normal)
+            favoriteCountLabel.text = "\(Int(favoriteCountLabel.text!)! + 1)"
+            favorited = true
+        } else {
+            favoriteButtonOutlet.setImage(UIImage(named: "favor-icon"), for: UIControlState.normal)
+            favoriteCountLabel.text = "\(Int(favoriteCountLabel.text!)! - 1)"
+            favorited = false
+        }
+    }
 }
