@@ -19,6 +19,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.tintColor = UIColor.white
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -41,6 +43,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tweet: Tweet!
+        tweet = tweets[indexPath.row]
+        performSegue(withIdentifier: "TweetDetailsPage", sender: tweet)
+    }
+    
     // Pull to refresh action
     func refreshControlAction() {
         TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
@@ -55,6 +63,22 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func onLogoutButton(_ sender: Any) {
         TwitterClient.sharedInstance?.logout()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "TweetDetailsPage" {
+            
+            // Set title for back button
+            let backButton = UIBarButtonItem()
+            backButton.title = "Home"
+            navigationItem.backBarButtonItem = backButton
+            
+            if let destination = segue.destination as? TweetDetailViewController {
+                if let tweet = sender as? Tweet {
+                    destination.tweet = tweet
+                }
+            }
+        }
     }
     
 
