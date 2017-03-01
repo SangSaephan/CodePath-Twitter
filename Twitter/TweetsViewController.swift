@@ -66,12 +66,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Set title for back button
+        let backButton = UIBarButtonItem()
+        backButton.title = "Home"
+        navigationItem.backBarButtonItem = backButton
+        
         if segue.identifier == "TweetDetailsPage" {
-            
-            // Set title for back button
-            let backButton = UIBarButtonItem()
-            backButton.title = "Home"
-            navigationItem.backBarButtonItem = backButton
             
             if let destination = segue.destination as? TweetDetailViewController {
                 if let tweet = sender as? Tweet {
