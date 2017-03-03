@@ -38,6 +38,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+        cell.profileImageButtonOutlet.tag = indexPath.row
         cell.configureCell(tweet: tweets[indexPath.row])
         
         return cell
@@ -46,6 +47,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tweet: Tweet!
         tweet = tweets[indexPath.row]
+        
         performSegue(withIdentifier: "TweetDetailsPage", sender: tweet)
     }
     
@@ -77,6 +79,16 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if let tweet = sender as? Tweet {
                     destination.tweet = tweet
                 }
+            }
+        }
+        
+        if segue.identifier == "User" {
+            
+            let button = sender as? UIButton
+            let tweet = tweets[(button?.tag)!]
+            
+            if let destination = segue.destination as? UserViewController {
+                destination.tweet = tweet
             }
         }
     }

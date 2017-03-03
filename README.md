@@ -59,7 +59,7 @@ I found it difficult to implement the retweet and favorite functionalities becau
 
 # Project 5 - *Twitter*
 
-Time spent: **5** hours spent in total
+Time spent: **8** hours spent in total
 
 ## User Stories
 
@@ -69,7 +69,7 @@ The following **required** functionality is completed:
 - [X] Profile page:
    - [X] Contains the user header view
    - [X] Contains a section with the users basic stats: # tweets, # following, # followers
-- [ ] Home Timeline: Tapping on a user image should bring up that user's profile page
+- [X] Home Timeline: Tapping on a user image should bring up that user's profile page
 - [ ] Compose Page: User can compose a new tweet by tapping on a compose button.
 
 The following **optional** features are implemented:
