@@ -88,4 +88,53 @@ class TwitterClient: BDBOAuth1SessionManager {
             
         })
     }
+    
+    func retweet(id: Int, success: @escaping (Tweet)-> (), failure: @escaping (Error) -> ()) {
+        
+        post("1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask!, response: Any?) -> Void in
+            print("Retweet successful!")
+        }) { (task: URLSessionDataTask?, error: Error!) in
+            print(error.localizedDescription)
+            print("Retweet failure!")
+        }
+    }
+    
+    func unRetweet(id: Int, success: @escaping (Tweet)-> (), failure: @escaping (Error) -> ()) {
+        
+        post("1.1/statuses/unretweet/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask!, response: Any?) -> Void in
+            print("Unretweet successful!")
+        }) { (task: URLSessionDataTask?, error: Error!) in
+            print(error.localizedDescription)
+            print("Unretweet failure!")
+        }
+    }
+    
+    func favorite(id: Int, success: @escaping (Tweet)-> (), failure: @escaping (Error) -> ()) {
+        
+        post("1.1/favorites/create.json?id=\(id)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask!, response: Any?) -> Void in
+            print("Favorited successful!")
+        }) { (task: URLSessionDataTask?, error: Error!) in
+            print(error.localizedDescription)
+            print("Favorited failure!")
+        }
+    }
+    
+    func unfavorite(id: Int, success: @escaping (Tweet)-> (), failure: @escaping (Error) -> ()) {
+        
+        post("/1.1/favorites/destroy.json?id=\(id)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask!, response: Any?) -> Void in
+            print("Unfavorited successful!")
+        }) { (task: URLSessionDataTask?, error: Error!) in
+            print(error.localizedDescription)
+            print("Unfavorited failure! ")
+        }
+    }
+    
+    func postTweet(status: String) {
+        post("1.1/statuses/update.json", parameters: ["status":status], progress: nil, success: { (task: URLSessionDataTask!, response: Any?) -> Void in
+            print("Tweet successful!")
+        }) { (task: URLSessionDataTask?, error: Error!) in
+            print(error.localizedDescription)
+            print("Tweet failure!")
+        }
+    }
 }

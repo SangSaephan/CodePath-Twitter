@@ -17,8 +17,13 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteCountLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var retweetButtonOutlet: UIButton!
+    @IBOutlet weak var favoriteButtonOutlet: UIButton!
+    
     
     var tweet: Tweet!
+    var retweeted = false
+    var favorited = false
     let formatter = DateFormatter()
     
     override func viewDidLoad() {
@@ -44,15 +49,20 @@ class TweetDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func retweetButtonPressed(_ sender: Any) {
+        if retweeted == false {
+            retweetButtonOutlet.setImage(UIImage(named: "retweet-icon-green"), for: UIControlState.normal)
+        } else {
+            retweetButtonOutlet.setImage(UIImage(named: "retweet-icon"), for: UIControlState.normal)
+        }
     }
-    */
+    
+    @IBAction func favoriteButtonPressed(_ sender: Any) {
+        if favorited == false {
+            favoriteButtonOutlet.setImage(UIImage(named: "favor-icon-red"), for: UIControlState.normal)
+        } else {
+            favoriteButtonOutlet.setImage(UIImage(named: "favor-icon"), for: UIControlState.normal)
+        }
+    }
 
 }

@@ -82,10 +82,25 @@ class TweetCell: UITableViewCell {
         
         if retweeted == false {
             retweetButtonOutlet.setImage(UIImage(named: "retweet-icon-green"), for: UIControlState.normal)
+            
+            TwitterClient.sharedInstance?.retweet(id: tweetID!, success: { (tweet: Tweet) in
+                
+            }, failure: { (error: Error) in
+                
+            })
+            
             retweetCountLabel.text = "\(Int(retweetCountLabel.text!)! + 1)"
             retweeted = true
+            
         } else {
             retweetButtonOutlet.setImage(UIImage(named: "retweet-icon"), for: UIControlState.normal)
+            
+            TwitterClient.sharedInstance?.unRetweet(id: tweetID!, success: { (tweet: Tweet) in
+                
+            }, failure: { (error: Error) in
+                
+            })
+            
             retweetCountLabel.text = "\(Int(retweetCountLabel.text!)! - 1)"
             retweeted = false
         }
@@ -95,10 +110,24 @@ class TweetCell: UITableViewCell {
         
         if favorited == false {
             favoriteButtonOutlet.setImage(UIImage(named: "favor-icon-red"), for: UIControlState.normal)
+            
+            TwitterClient.sharedInstance?.favorite(id: tweetID!, success: { (tweet: Tweet) in
+                
+            }, failure: { (error: Error) in
+                
+            })
+            
             favoriteCountLabel.text = "\(Int(favoriteCountLabel.text!)! + 1)"
             favorited = true
         } else {
             favoriteButtonOutlet.setImage(UIImage(named: "favor-icon"), for: UIControlState.normal)
+            
+            TwitterClient.sharedInstance?.unfavorite(id: tweetID!, success: { (tweet: Tweet) in
+                
+            }, failure: { (error: Error) in
+                
+            })
+            
             favoriteCountLabel.text = "\(Int(favoriteCountLabel.text!)! - 1)"
             favorited = false
         }

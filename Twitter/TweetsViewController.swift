@@ -31,7 +31,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         refreshControlAction()
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        refreshControlAction()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
     }
